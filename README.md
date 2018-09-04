@@ -1,7 +1,8 @@
 
-# RChain and Python
+# RChain and Python
 
-Experimenting the interaction of Python code with the RChain network
+Experimenting the interaction of Python code with the [RChain blockchain](https://www.rchain.coop/)
+
 
 ## how to
 
