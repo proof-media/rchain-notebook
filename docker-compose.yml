@@ -21,13 +21,12 @@ services:
 
   notes:
     build: ./builds/notebook
+    image: proof/nb:0.2
     command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
     hostname: notebook
     environment:
       NODE_NAME: ${NODE_NAME}
-    image: proof/nb:0.1
     volumes:
-      - ./src:/usr/local/lib/python3.7/site-packages/rchain_grpc
       - ./notebooks:/app
     working_dir: /app
     networks:

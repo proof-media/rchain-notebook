@@ -22,3 +22,6 @@ RUN mkdir -p /root/.jupyter \
         > $JUPYTER_CONFIG_FILE \
     && echo "c.NotebookApp.password = passwd('proofmedia')" \
         >> $JUPYTER_CONFIG_FILE
+
+RUN pip install --no-cache-dir --upgrade \
+        git+https://github.com/proof-media/rchain-grpc.git@master
