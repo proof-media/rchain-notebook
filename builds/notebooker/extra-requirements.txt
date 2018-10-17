@@ -1,0 +1,3 @@
+pip==18.1
+requests==2.19.1
+rchain-grpc==0.0.10
