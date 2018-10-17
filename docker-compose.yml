@@ -16,7 +16,7 @@ services:
       NOTEBOOK_PASSWORD: ${NOTEBOOK_PASSWORD}
     volumes:
       - ./notebooks:/app
-      - ../rho/voting:/opt/contracts/
+      # - ../rho/voting:/opt/contracts/
     working_dir: /app
     networks:
       app:
@@ -29,8 +29,9 @@ services:
       - /opt/docker/bin/rnode
     command: run --standalone --validator-private-key ${NODE_PRIVATE_KEY}
     volumes:
-      - ./data:/rchain
-      - ../rho/voting:/opt/contracts/
+      - ./files:/rchain
+      - ./files/bash.rc:/root/.bashrc
+      # - ../rho/voting:/opt/contracts/
     working_dir: /rchain
     networks:
       app:
