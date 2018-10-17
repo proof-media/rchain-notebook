@@ -16,7 +16,7 @@ services:
       NOTEBOOK_PASSWORD: ${NOTEBOOK_PASSWORD}
     volumes:
       - ./notebooks:/app
-      # - ../rho/voting:/opt/contracts/
+      # - ../rho:/opt/contracts
     working_dir: /app
     networks:
       app:
@@ -25,14 +25,28 @@ services:
 
   rnode:
     image: rchain/rnode:${TAG}
-    entrypoint:
-      - /opt/docker/bin/rnode
-    command: run --standalone --validator-private-key ${NODE_PRIVATE_KEY}
+    hostname: ${NODE_NAME}
+    # working_dir: /rchain
+    # entrypoint:
+    #   - /opt/docker/bin/rnode
+    command:
+      - run
+      - --standalone
+      - --host
+      - ${NODE_NAME}
+      - --validator-private-key
+      - ${NODE_PRIVATE_KEY}
+      - --bonds-file
+      - /rchain/bonds.txt
+      # # avoiding reaching out
+      # - --no-upnp
+      # # silence kademlia with non standard port
+      # - --kademlia-port
+      # - '35678'
     volumes:
       - ./files:/rchain
       - ./files/bash.rc:/root/.bashrc
-      # - ../rho/voting:/opt/contracts/
-    working_dir: /rchain
+      # - ../rho:/opt/contracts
     networks:
       app:
         aliases:
