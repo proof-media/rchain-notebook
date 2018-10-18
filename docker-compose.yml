@@ -8,7 +8,8 @@ services:
 
   notes:
     build: ./builds/notebooker
-    # image: pdonorio/rchain-notebooker:${NOTEBOOKER_VERSION}
+    # BUILDING AUTOMATICALLY ON DOCKER HUB
+    # image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
     # command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
     hostname: notebook
     environment:
