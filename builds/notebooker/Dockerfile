@@ -9,14 +9,14 @@ RUN apk --no-cache update && \
         libpng freetype libstdc++ libxslt libxml2
 
 WORKDIR /tmp
-COPY ./requirements.txt /requirements.txt
+COPY ./requirements.txt requirements.txt
 COPY ./extra-requirements.txt dev-requirements.txt
 # Add build deps for numpy/pandas/matplotlib and remove them
 RUN apk add --no-cache --virtual .build-deps \
         musl-dev gcc g++ libxslt-dev libxml2-dev \
         libpng-dev freetype-dev \
     && pip install --no-cache-dir --upgrade \
-        -r /tmp/requirements.txt \
+        -r requirements.txt \
     && apk del .build-deps
 RUN pip install --upgrade --no-cache-dir \
     -r dev-requirements.txt
