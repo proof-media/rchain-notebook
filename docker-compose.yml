@@ -7,10 +7,14 @@ networks:
 services:
 
   notes:
-    build: ./builds/notebooker
-    # BUILDING AUTOMATICALLY ON DOCKER HUB
-    # image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
-    # command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
+    # #####
+    # build: ./builds/notebooker
+    # # command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
+    # # image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
+    #####
+    # building automatically on docker hub since it's time consuming
+    image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
+    #####
     hostname: notebook
     environment:
       NODE_NAME: ${NODE_NAME}
