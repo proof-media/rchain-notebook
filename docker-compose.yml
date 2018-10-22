@@ -6,30 +6,53 @@ networks:
 
 services:
 
-  rnode:
-    image: rchain/rnode:${TAG}
-    entrypoint:
-      - /opt/docker/bin/rnode
-    command: run -s -n --data_dir ./data --bonds-file ./bonds.txt --validator-private-key ${NODE_PRIVATE_KEY}
-    volumes:
-      - ./data:/rchain
-    working_dir: /rchain
-    networks:
-      app:
-        aliases:
-          - ${NODE_NAME}
-
   notes:
-    build: ./builds/notebook
-    image: proof/nb:0.2
-    command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
+    # #####
+    # build: ./builds/notebooker
+    # # command: jupyter notebook --no-browser --ip 0.0.0.0 --allow-root
+    # # image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
+    #####
+    # building automatically on docker hub since it's time consuming
+    image: proofmedia/rchain-notebook:${NOTEBOOKER_VERSION}
+    #####
     hostname: notebook
     environment:
       NODE_NAME: ${NODE_NAME}
+      NOTEBOOK_PASSWORD: ${NOTEBOOK_PASSWORD}
     volumes:
       - ./notebooks:/app
+      # - ../rho:/opt/contracts
     working_dir: /app
     networks:
       app:
     ports:
       - "8888:8888"
+
+  rnode:
+    image: rchain/rnode:${TAG}
+    hostname: ${NODE_NAME}
+    # working_dir: /rchain
+    # entrypoint:
+    #   - /opt/docker/bin/rnode
+    command:
+      - run
+      - --standalone
+      - --host
+      - ${NODE_NAME}
+      - --validator-private-key
+      - ${NODE_PRIVATE_KEY}
+      - --bonds-file
+      - /rchain/bonds.txt
+      # # avoiding reaching out
+      # - --no-upnp
+      # # silence kademlia with non standard port
+      # - --kademlia-port
+      # - '35678'
+    volumes:
+      - ./files:/rchain
+      - ./files/bash.rc:/root/.bashrc
+      # - ../rho:/opt/contracts
+    networks:
+      app:
+        aliases:
+          - ${NODE_NAME}

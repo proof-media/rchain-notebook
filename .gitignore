@@ -5,6 +5,5 @@ __pycache__/
 *.py[cod]
 # notebooks
 .ipynb_checkpoints
-# rnode
-data/data
-#rspace
+# rnode things
+files/data

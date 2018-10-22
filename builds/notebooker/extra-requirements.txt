@@ -1,0 +1,5 @@
+pip==18.1
+requests==2.19.1
+#grpcio-tools
+#rchain-grpc==0.0.10
+git+https://github.com/proof-media/rchain-grpc.git@update/rnode-0.7
