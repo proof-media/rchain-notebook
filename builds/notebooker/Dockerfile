@@ -21,16 +21,16 @@ COPY ./extra-requirements.txt dev-requirements.txt
 RUN pip install --upgrade --no-cache-dir \
     -r dev-requirements.txt
 
-#########################
-# HACK to skip issue:
-# https://github.com/protocolbuffers/protobuf/issues/5272
-ENV PYPPATHS /usr/local/lib/python3.7/site-packages
-ENV PATCH_REPO pdonorio/protobuf/rchain-workaround
-RUN cd $PYPPATHS/google/protobuf/internal/ \
-    && rm python_message.py* \
-    && wget -q https://raw.githubusercontent.com/$PATCH_REPO/python/google/protobuf/internal/python_message.py \
-    && echo "protobuf patched"
-#########################
+# #########################
+# # HACK to skip issue:
+# # https://github.com/protocolbuffers/protobuf/issues/5272
+# ENV PYPPATHS /usr/local/lib/python3.7/site-packages
+# ENV PATCH_REPO pdonorio/protobuf/rchain-workaround
+# RUN cd $PYPPATHS/google/protobuf/internal/ \
+#     && rm python_message.py* \
+#     && wget -q https://raw.githubusercontent.com/$PATCH_REPO/python/google/protobuf/internal/python_message.py \
+#     && echo "protobuf patched"
+# #########################
 
 ENV JUPYTER_CONFIG_FILE /root/.jupyter/jupyter_notebook_config.py
 ENV NOTEBOOK_PASSWORD somenicelongerpassw

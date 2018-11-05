@@ -1,10 +1,12 @@
 #!/bin/sh
 set -e
 
-# TODO: add slides (rise) and notebook extensions (toc in particular)
-
 ##############
 # Entrypoint
+##############
+
+# # fixes (not sure why is needed in alpine)
+# touch /usr/local/lib/python3.7/site-packages/google/__init__.py
 
 # configure extensions
 jupyter contrib nbextension install --user
