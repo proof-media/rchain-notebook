@@ -1,10 +1,9 @@
 #!/bin/sh
 set -e
 
-# TODO: add slides (rise) and notebook extensions (toc in particular)
-
 ##############
 # Entrypoint
+##############
 
 # configure extensions
 jupyter contrib nbextension install --user
